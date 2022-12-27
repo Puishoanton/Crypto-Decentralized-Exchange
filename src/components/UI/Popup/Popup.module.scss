@@ -1,0 +1,22 @@
+@import '../../../styles/vars.scss';
+
+.popup {
+  display: none;
+  z-index: 2;
+  position: absolute;
+  top: 130px;
+  left: 45%;
+  width: 230px;
+  height: 75px;
+  background-color: $secondaryBg;
+  border-radius: rem(24);
+  padding: rem(20);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0.01), 0 4px 8px rgba(0, 0, 0, 0.04),
+    0 16px 24px rgba(0, 0, 0, 0.04), 0 24px 32px rgba(0, 0, 0, 0.1);
+}
+.active {
+  display: block;
+}
+.slippage-modal {
+  height: rem(150);
+}

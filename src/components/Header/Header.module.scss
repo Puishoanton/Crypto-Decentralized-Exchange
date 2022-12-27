@@ -1,0 +1,96 @@
+@import '../../styles/vars.scss';
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: rem(16);
+  padding: rem(20);
+  align-items: center;
+  .logo {
+    color: #fff;
+  }
+  .selector {
+    position: relative;
+    z-index: 1001;
+    display: flex;
+    padding: 0 rem(16);
+    margin: 0 0 0 rem(12);
+    height: rem(40);
+    width: 40%;
+    background-color: $secondaryBg;
+    border-radius: rem(100);
+    align-items: center;
+    div {
+      display: flex;
+      align-items: center;
+      width: 100%;
+    }
+    ul {
+      position: absolute;
+      top: 50px;
+      width: rem(230);
+      background-color: $secondaryBg;
+      border-radius: rem(24);
+      list-style: none;
+      overflow: hidden;
+      li {
+        padding: rem(12) rem(20);
+        a {
+          color: #fff;
+        }
+        &:hover {
+          background: #24243a;
+        }
+      }
+    }
+  }
+
+  .navigation {
+    display: flex;
+    gap: rem(20);
+    height: 100%;
+    background-color: $secondaryBg;
+    overflow: hidden;
+    border-radius: rem(50);
+    .link {
+      display: flex;
+      align-items: center;
+      padding: rem(8) rem(16);
+    }
+    .swap {
+      background-color: $currentBg;
+      margin: 4px;
+      border-radius: rem(50);
+    }
+    // .liquidity {
+    // }
+  }
+  .notification-wallet {
+    display: flex;
+    align-items: center;
+
+    .notification {
+      background-color: $secondaryBg;
+      border: none;
+      border-radius: 50%;
+      height: rem(48);
+      width: rem(48);
+      margin: 0 rem(16);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      img {
+        width: 15px;
+        height: 16px;
+      }
+    }
+  }
+}
+@media screen and (max-width: 350px) {
+  .header {
+    .notification-wallet {
+      .notification {
+        display: none;
+      }
+    }
+  }
+}

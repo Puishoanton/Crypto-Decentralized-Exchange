@@ -1,0 +1,13 @@
+@function rem($value) {
+  $remValue: ($value / 16) + rem;
+  @return $remValue;
+}
+
+$primary: #6e42ca;
+$second: #c4b5fd;
+$primaryBg: #16162d;
+$secondaryBg: #1c1c33;
+$input: #31314e;
+$currentBg: #4a495e;
+$border1: #747473;
+$border2: #c8c7cc;

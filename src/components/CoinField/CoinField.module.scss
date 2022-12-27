@@ -1,0 +1,49 @@
+@import '../../styles/vars.scss';
+
+.input {
+  background-color: $input;
+  display: flex;
+  justify-content: space-between;
+  padding: rem(16);
+  border-radius: rem(20);
+  input {
+    color: #fff;
+    font-size: rem(28);
+    outline: none;
+    background-color: transparent;
+    border: none;
+    width: 70%;
+  }
+  .select-coin {
+    color: #fff;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: rem(32);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.08);
+    background-color: $secondaryBg;
+    padding: rem(7);
+    .coin {
+      width: rem(24);
+      height: rem(24);
+    }
+    span {
+      font-size: rem(16);
+      margin: rem(0) rem(4) rem(0) rem(8);
+    }
+    .arrow {
+      transform: rotate(180deg);
+      width: rem(16);
+      height: rem(16);
+    }
+    .arrow-open {
+      transform: rotate(0deg);
+    }
+  }
+}
+.input-1,
+.input-2 {
+  margin-bottom: rem(8);
+}

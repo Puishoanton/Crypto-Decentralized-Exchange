@@ -1,0 +1,33 @@
+@import '../../styles/vars.scss';
+
+.main {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: center;
+  //   align-items: center;
+  .card {
+    display: flex;
+    flex-direction: column;
+    gap: rem(30);
+    max-width: rem(480);
+    border-radius: rem(24);
+    min-height: rem(200);
+    padding: rem(16) rem(20);
+    margin: 0 rem(8) ;
+    color: #fff;
+    background-color: $primaryBg;
+
+    font-size: rem(24);
+    .header {
+      text-align: center;
+      font-size: rem(36);
+    }
+    .main-content {
+      color: #ffffff88;
+    }
+    .start {
+    }
+  }
+  .info {
+  }
+}
