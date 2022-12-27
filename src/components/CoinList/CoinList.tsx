@@ -1,5 +1,5 @@
 import { ChangeEvent, FC } from 'react'
-import { CoinsType } from 'src/@types'
+import { CoinsType } from 'src/types'
 import styles from './CoinList.module.scss'
 type CoinListProps = {
   coins: CoinsType[]

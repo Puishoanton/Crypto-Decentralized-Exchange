@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NavigationType } from 'src/@types'
+import { NavigationType } from 'src/types'
 import {
   BRIDGE_PATH,
   CREATE_POOL_PATH,

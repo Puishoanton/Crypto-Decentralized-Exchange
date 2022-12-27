@@ -1,4 +1,4 @@
-import { CoinsType } from './../@types/index'
+import { CoinsType } from '../types/index'
 import { ChangeEvent, SyntheticEvent, useCallback, useState } from 'react'
 
 export const useModalCoinList = (coins: CoinsType[]) => {

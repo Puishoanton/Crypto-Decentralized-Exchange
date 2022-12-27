@@ -7,4 +7,6 @@ export type CoinsType = {
   name: string
   price: number
   picture: string
+  CurrencyReservs: number
+  CurrencyReservsUSDT: number
 }

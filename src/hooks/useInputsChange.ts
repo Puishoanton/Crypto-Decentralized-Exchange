@@ -1,4 +1,4 @@
-import { CoinsType } from './../@types/index'
+import { CoinsType } from '../types/index'
 import { useEffect, useState } from 'react'
 
 export const useInputsChange = (tokenFromSelector: CoinsType, tokenFromSelector1: CoinsType) => {

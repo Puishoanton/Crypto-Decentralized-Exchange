@@ -4,7 +4,7 @@ import styles from './Popup.module.scss'
 type PopupProps = {
   children: ReactNode
   isOpen: boolean
-  divRef: RefObject<HTMLDivElement>
+  divRef?: RefObject<HTMLDivElement>
   classes: string
 }
 

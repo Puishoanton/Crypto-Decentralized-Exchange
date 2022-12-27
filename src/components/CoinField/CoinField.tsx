@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { CoinsType } from 'src/@types'
+import { CoinsType } from 'src/types'
 import arrow from '../../assets/arrow.svg'
 import styles from './CoinField.module.scss'
 
@@ -28,7 +28,7 @@ const CoinField: FC<CoinFieldProps> = ({
     <div className={[styles['input'], styles[classes]].join(' ')}>
       <input
         disabled={!tokenFromSelector || !!!tokenFromSelector1}
-        placeholder='0.0'
+        placeholder='0,0'
         type='number'
         value={inputValue}
         onChange={e => inputHandler(e)}

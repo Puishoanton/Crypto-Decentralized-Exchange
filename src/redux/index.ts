@@ -1,8 +1,10 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 import SlippageSlice from './reducers/SlippageSlice'
+import CurrencyReservsSlice from './reducers/CurrencyReservsSlice'
 
 const rootReducer = combineReducers({
   SlippageSlice,
+  CurrencyReservsSlice,
 })
 
 export const setupStore = () => configureStore({ reducer: rootReducer })

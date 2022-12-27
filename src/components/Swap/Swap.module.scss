@@ -7,31 +7,73 @@
   .header {
     display: flex;
     justify-content: space-between;
-
+    margin-bottom: rem(10);
     div {
       font-size: rem(16);
     }
   }
   .main {
-    position: relative;
-    z-index: 1;
-    .change {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: rem(32);
-      height: rem(32);
-      transform: translate(-50%, -50%);
-      background-color: $secondaryBg;
-      border: 4px solid $primaryBg;
-      border-radius: rem(12);
-      z-index: 2;
+    .inputs {
+      position: relative;
+      z-index: 1;
+      .change {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: rem(32);
+        height: rem(32);
+        transform: translate(-50%, -50%);
+        background-color: $secondaryBg;
+        border: 4px solid $primaryBg;
+        border-radius: rem(12);
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        img {
+          width: rem(12);
+          height: rem(12);
+        }
+      }
+    }
+    .show-details {
+      margin-top: rem(30);
       display: flex;
-      justify-content: center;
+      justify-content: space-between;
+      font-size: rem(18);
       align-items: center;
-      img {
-        width: rem(12);
-        height: rem(12);
+      padding: rem(10) rem(0);
+    }
+    .output,
+    .after-slippage {
+      font-size: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+    .show-details-active {
+      background: $input;
+      border-radius: rem(6);
+      padding: rem(10) rem(10);
+    }
+    .impact-fee {
+      margin-bottom: rem(30);
+      .impact {
+        margin-bottom: rem(5);
+      }
+      .impact,
+      .fee {
+        font-size: 1.1rem;
+        display: flex;
+        justify-content: space-between;
+      }
+      .impact-green {
+        color: #4caf50;
+      }
+      .impact-yellow {
+        color: #fbc02d;
+      }
+      .impact-red {
+        color: #ff4032;
       }
     }
   }
