@@ -1,10 +1,10 @@
-import { FC } from 'react'
+import { Dispatch, FC, SetStateAction } from 'react'
 import styles from './Modal.module.scss'
 
 type ModalProps = {
   children?: any
   isVisibleNotification: boolean
-  setIsVisibleNotification: (bol: boolean) => void
+  setIsVisibleNotification: Dispatch<SetStateAction<boolean>>
 }
 
 const Modal: FC<ModalProps> = ({ children, isVisibleNotification, setIsVisibleNotification }) => {

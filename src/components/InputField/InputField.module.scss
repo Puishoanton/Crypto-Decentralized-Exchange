@@ -1,0 +1,16 @@
+@import '../../styles/vars.scss';
+
+.swap-field {
+  background-color: $input;
+  display: flex;
+  justify-content: space-between;
+  padding: rem(16);
+  border-radius: rem(20);
+}
+
+@media (max-width: 576px) {
+  .swap-field {
+    padding: rem(10);
+    border-radius: rem(16);
+  }
+}

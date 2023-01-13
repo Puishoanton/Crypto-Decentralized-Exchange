@@ -1,9 +1,10 @@
-import React from 'react'
 import './styles/styles.scss'
 import AppRouter from './routes/AppRouter'
 
 const App = () => {
-  return <AppRouter />
+  return (
+      <AppRouter />
+  )
 }
 
 export default App

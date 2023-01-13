@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NavigationType } from 'src/types'
+import { NavigationType } from 'src/models'
 import { useOutside } from 'src/hooks/useOutside'
 
 import arrow from '../../../assets/arrow.svg'

@@ -1,12 +1,12 @@
-import React from 'react'
 import { Link } from 'react-router-dom'
+import Card from 'src/components/Card/Card'
 import Button from 'src/components/UI/Button/Button'
 import { SWAP_PATH } from 'src/routes/Routes'
-import styles from '../components/Main/Main.module.scss'
+import styles from '../components/Card/Card.module.scss'
 
 const Greating = () => {
   return (
-    <>
+    <Card>
       <header className={styles['header']}>
         Welcome <br /> to my pet project!
       </header>
@@ -18,7 +18,7 @@ const Greating = () => {
           <Button title="Let's start!" />
         </Link>
       </footer>
-    </>
+    </Card>
   )
 }
 

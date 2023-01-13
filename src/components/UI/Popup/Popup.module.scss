@@ -19,10 +19,25 @@
 }
 .slippage-modal {
   height: rem(150);
+  left: 45%;
 }
 .details {
   margin: rem(10) 0;
   position: static;
   width: 100%;
   border: 1px solid #c3b5fd52;
+}
+@media (max-width: 576px) {
+ 
+  .slippage-modal {
+    height: rem(150);
+    left: 20%;
+  }
+  .details {
+    margin: rem(10) 0;
+    padding: rem(10) rem(20);
+    position: static;
+    width: 100%;
+    border: 1px solid #c3b5fd52;
+  }
 }

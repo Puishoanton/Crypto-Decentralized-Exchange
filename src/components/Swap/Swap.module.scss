@@ -14,6 +14,9 @@
   }
   .main {
     .inputs {
+      display: flex;
+      flex-direction: column;
+      gap: rem(10);
       position: relative;
       z-index: 1;
       .change {
@@ -46,7 +49,7 @@
     }
     .output,
     .after-slippage {
-      font-size: 1rem;
+      font-size: rem(16);
       display: flex;
       justify-content: space-between;
     }
@@ -77,6 +80,30 @@
       }
     }
   }
+
   // .footer {
   // }
+}
+@media (max-width: 576px) {
+  .swap {
+    .main {
+      .inputs {
+        .change {
+          width: rem(28);
+          height: rem(28);
+        }
+      }
+      .show-details {
+        font-size: rem(16);
+      }
+      .impact-fee {
+        // .impact {
+        // }
+        .impact,
+        .fee {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
 }

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { NavigationType } from 'src/types'
+import { NavigationType } from 'src/models'
 import {
   BRIDGE_PATH,
   CREATE_POOL_PATH,
@@ -10,9 +10,9 @@ import {
   SWAP_PATH,
 } from 'src/routes/Routes'
 import notification from '../../assets/notification.svg'
-import Button from '../../components/UI/Button/Button'
-import Modal from '../../components/UI/Modal/Modal'
-import Selector from '../../components/UI/Selector/Selector'
+import Button from '../UI/Button/Button'
+import Modal from '../UI/Modal/Modal'
+import Selector from '../UI/Selector/Selector'
 import styles from './Header.module.scss'
 
 const Header = () => {

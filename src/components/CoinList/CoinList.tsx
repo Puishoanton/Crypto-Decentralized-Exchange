@@ -1,37 +1,36 @@
-import { ChangeEvent, FC } from 'react'
-import { CoinsType } from 'src/types'
+import { Dispatch, FC, SetStateAction, useState } from 'react'
+import { useSearchToken } from 'src/hooks/useSearchToken'
+import CoinBtn from './CoinBtn'
 import styles from './CoinList.module.scss'
 type CoinListProps = {
-  coins: CoinsType[]
-  setSelectedToken: (id: number) => void
-
-  setIsCoinListShown: (shown: boolean) => void
-  sortetCoinList: CoinsType[]
-  searchToken: (e: ChangeEvent<HTMLInputElement>) => void
+  setCoinModal: Dispatch<SetStateAction<boolean>>
+  selectCoinAction: any
 }
 
-const CoinList: FC<CoinListProps> = ({
-  coins,
-  setSelectedToken,
-  searchToken,
-  sortetCoinList,
-  setIsCoinListShown,
-}) => {
+const CoinList: FC<CoinListProps> = props => {
+  const [inputValue, setInputValue] = useState('')
+  const { sortetCoinList } = useSearchToken(inputValue)
+
   return (
     <div className={styles['coin-list']}>
-      <input type='text' onChange={e => searchToken(e)} />
-      <ol>
+      <span className={styles['header']}>Select a coin</span>
+      <input
+        type='text'
+        placeholder='Put name or address'
+        value={inputValue}
+        onChange={e => setInputValue(e.target.value)}
+      />
+      <ul>
         {sortetCoinList.map(token => (
-          <li
-            onClick={() => {
-              setSelectedToken(token.id)
-              setIsCoinListShown(false)
-            }}
-            key={token.id}>
-            {token.name}
+          <li key={token.id}>
+            <CoinBtn
+              selectCoinAction={props.selectCoinAction}
+              setCoinModal={props.setCoinModal}
+              token={token}
+            />
           </li>
         ))}
-      </ol>
+      </ul>
     </div>
   )
 }

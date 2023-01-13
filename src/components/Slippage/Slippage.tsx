@@ -1,4 +1,4 @@
-import { FC, RefObject } from 'react'
+import { Dispatch, FC, RefObject, SetStateAction } from 'react'
 import { useAppDispatch } from 'src/hooks/useRedux'
 import settings from '../../assets/settings.svg'
 import { setUpCurrentProcent } from '../../redux/reducers/SlippageSlice'
@@ -13,44 +13,35 @@ type SlippageProps = {
   tolerance: number[]
   current: number
   slippageInputValue: number | string
-  setSlippageInputValue: (value: number | string) => void
+  setSlippageInputValue: Dispatch<SetStateAction<number | string>>
 }
 
-const Slippage: FC<SlippageProps> = ({
-  setIsPopup,
-  contentRef,
-  openRef,
-  isPopup,
-  current,
-  setSlippageInputValue,
-  slippageInputValue,
-  tolerance,
-}) => {
+const Slippage: FC<SlippageProps> = props => {
   const dispatch = useAppDispatch()
 
   return (
     <>
       <button
-        ref={openRef}
+        ref={props.openRef}
         className={styles['slippage']}
         onClick={e => {
           e.preventDefault()
-          setIsPopup(!isPopup)
+          props.setIsPopup(!props.isPopup)
         }}>
         <img src={settings} alt='Settings' />
       </button>
-      <Popup divRef={contentRef} isOpen={isPopup} classes={'slippage-modal'}>
+      <Popup divRef={props.contentRef} isOpen={props.isPopup} classes={'slippage-modal'}>
         <header className={styles['slippage-header']}>Settings</header>
         <main className={styles['slippage-main']}>
           <div className={styles['slippage-tolerance']}>
             <span>Slippage Tolerance:</span>
             <div className={styles['btns']}>
-              {tolerance.map(btn => (
+              {props.tolerance.map(btn => (
                 <button
                   onClick={e => {
                     e.preventDefault()
                     dispatch(setUpCurrentProcent(btn))
-                    setSlippageInputValue(btn)
+                    props.setSlippageInputValue(btn)
                   }}
                   className={styles['porcent']}
                   key={btn}>
@@ -63,16 +54,16 @@ const Slippage: FC<SlippageProps> = ({
             <button
               onClick={e => {
                 e.preventDefault()
-                setSlippageInputValue(0.5)
+                props.setSlippageInputValue(0.5)
                 dispatch(setUpCurrentProcent(0.5))
               }}
               title='Auto'>
               Auto{' '}
             </button>
             <input
-              value={slippageInputValue}
+              value={props.slippageInputValue}
               onChange={e => {
-                setSlippageInputValue(e.target.value)
+                props.setSlippageInputValue(e.target.value)
                 dispatch(setUpCurrentProcent(+e.target.value))
               }}
               placeholder='0.5%'

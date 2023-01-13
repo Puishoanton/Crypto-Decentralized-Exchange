@@ -9,4 +9,10 @@ export type CoinsType = {
   picture: string
   CurrencyReservs: number
   CurrencyReservsUSDT: number
+  layer: string
+  selected: boolean
 }
+
+
+
+

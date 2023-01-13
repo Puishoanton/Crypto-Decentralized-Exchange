@@ -1,7 +1,105 @@
+@import '../../styles/vars.scss';
+
 .coin-list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // gap: 30px;
+  height: 100%;
+  span {
+    color: white;
+    font-size: rem(20);
+  }
+  input {
+    color: white;
+    margin: rem(10) 0 rem(20) 0;
+    outline: none;
+    background-color: transparent;
+    border: 1px solid $border1;
+    border-radius: rem(10);
+    width: 100%;
+    padding: rem(5) rem(10);
+  }
+  ul {
+    border-top: 0.6px solid $border1;
+    margin: 0;
+    padding: 0;
+    padding-top: rem(20);
+    list-style: none;
+    height: 80%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      background-color: none;
+      width: 10px;
+    }
+
+    /* background of the scrollbar except button or resizer */
+    &::-webkit-scrollbar-track {
+      background-color: rgba(255, 255, 255, 0.047);
+    }
+
+    /* scrollbar itself */
+    &::-webkit-scrollbar-thumb {
+      background-color: #babac05b;
+      border-radius: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.411);
+    }
+
+    /* set button(top and bottom of the scrollbar) */
+    &::-webkit-scrollbar-button {
+      display: none;
+    }
+    li {
+      // display: flex;
+      // align-items: center;
+      // font-size: rem(16);
+      // gap: rem(10);
+
+      &:not(:last-child) {
+        margin-bottom: rem(10);
+      }
+      button {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        font-size: rem(16);
+        gap: rem(10);
+        border: none;
+        background-color: transparent;
+        padding: 3px 5px;
+
+        &:disabled {
+          opacity: 0.4;
+        }
+        img {
+          width: rem(28);
+          height: rem(28);
+        }
+        div {
+          display: flex;
+          flex-direction: column;
+
+          p {
+            text-align: left;
+            color: white;
+            &:last-child {
+              color: rgba(255, 255, 255, 0.667);
+              font-size: rem(14);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .coin-list {
+    ul {
+      li {
+        button {
+          font-size: rem(13);
+        }
+      }
+    }
+  }
 }
