@@ -1,9 +1,11 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from 'src/hooks/useRedux'
 import { NavigationType } from 'src/models'
+import { connectWallet } from 'src/redux/reducers/UserSlice'
 import {
-  BRIDGE_PATH,
-  CREATE_POOL_PATH,
+  ADD_LIQUIDITY_PATH,
+  FAUCET_PATH,
   LP_PATH,
   MAIN_PATH,
   POOLS_PATH,
@@ -19,12 +21,16 @@ const Header = () => {
   const services: NavigationType[] = [
     { title: 'Swap', path: SWAP_PATH },
     { title: 'Pools', path: POOLS_PATH },
-    { title: 'Create Pool', path: CREATE_POOL_PATH },
+    { title: 'Add Liquidity', path: ADD_LIQUIDITY_PATH },
     { title: 'Redeem LP', path: LP_PATH },
-    { title: 'Bridge', path: BRIDGE_PATH },
+    { title: 'Faucet', path: FAUCET_PATH },
   ]
   const windowOuterWidth = window.outerWidth
   const [isVisibleNotification, setIsVisibleNotification] = useState(false)
+  const dispatch = useAppDispatch()
+  const { isConnected, wallet } = useAppSelector(state => state.UserSlice)
+  const [isVisibleWallet, setIsVisibleWallet] = useState(false)
+
   return (
     <>
       <header className={styles['header']}>
@@ -32,13 +38,13 @@ const Header = () => {
           Logo
         </Link>
         {windowOuterWidth >= 768 ? (
-          <nav className={styles['navigation']}>
-            <div className={[styles['swap'], styles['link']].join(' ')}>Swap</div>
-            <div className={[styles['pool'], styles['link']].join(' ')}>Pools</div>
-            <div className={[styles['create-pool'], styles['link']].join(' ')}>Create Pool</div>
-            <div className={[styles['redeem-LP'], styles['link']].join(' ')}>Redeem LP</div>
-            <div className={[styles['bridge'], styles['link']].join(' ')}>Bridge</div>
-          </nav>
+          <ul className={styles['navigation']}>
+            {services.map((opt: NavigationType, index: number) => (
+              <li className={styles['link']} key={opt.title}>
+                <Link to={opt.path}>{opt.title}</Link>
+              </li>
+            ))}
+          </ul>
         ) : (
           <div className={styles['selector']}>
             <Selector options={services} />
@@ -53,13 +59,31 @@ const Header = () => {
             className={styles['notification']}>
             <img src={notification} alt='Notification' />
           </button>
-          <Button title='Connect a Wallet' className='wallet' />
+          {isConnected ? (
+            <div className={styles['profile']} onClick={() => setIsVisibleWallet(!isVisibleWallet)}>
+              <div className={styles['avatar']}></div>
+              <p>0x88DC...560</p>
+            </div>
+          ) : (
+            <Button
+              title='Connect a Wallet'
+              className='wallet'
+              onClick={() => dispatch(connectWallet())}
+            />
+          )}
         </div>
       </header>
       <Modal
         isVisibleNotification={isVisibleNotification}
         setIsVisibleNotification={setIsVisibleNotification}
       />
+      <Modal isVisibleNotification={isVisibleWallet} setIsVisibleNotification={setIsVisibleWallet}>
+        {wallet.map(coin => (
+          <div key={coin.id}>
+            {coin.id} - {coin.balance}
+          </div>
+        ))}
+      </Modal>
     </>
   )
 }

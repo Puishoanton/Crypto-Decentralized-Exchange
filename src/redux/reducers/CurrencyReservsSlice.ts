@@ -1,10 +1,11 @@
-import { CoinsType } from '../../models/index'
+import { Coin, CoinsType, WalletId } from '../../models/index'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import coinsImg from '../../assets/coinImports/coins'
 
 type initialStateType = {
   tokens: CoinsType[]
   TradePair: CoinsType[] | []
+  error: string
 }
 
 const initialState: initialStateType = {
@@ -41,7 +42,7 @@ const initialState: initialStateType = {
     },
     {
       id: 4,
-      name: 'EHT',
+      name: 'ETH',
       price: 1150,
       picture: coinsImg.eth,
       CurrencyReservs: 26,
@@ -131,7 +132,7 @@ const initialState: initialStateType = {
     },
   ],
   TradePair: [],
-  
+  error: '',
 }
 
 const CurrencyReservsSlice = createSlice({
@@ -141,8 +142,63 @@ const CurrencyReservsSlice = createSlice({
     disabledCoinsHandler: (state, action: PayloadAction<CoinsType[]>) => {
       state.TradePair = [...action.payload]
     },
+    balanceCheckForSwap: (
+      state,
+      action: PayloadAction<{
+        firstCoin: Coin
+        secondCoin: Coin
+        wallet: WalletId[]
+      }>
+    ) => {
+      const firstCoinWalletBalance = action.payload.wallet.reduce((acc, coin) => {
+        if (coin.id === action.payload.firstCoin.coin.name) {
+          acc = coin.balance
+          return acc
+        }
+
+        return acc
+      }, 0)
+
+      if (action.payload.firstCoin.tradeValue > firstCoinWalletBalance) {
+        state.error = `Insuficient ${action.payload.firstCoin.coin.name} balance`
+      }
+    },
+    currencyReservsErrorCleaner: state => {
+      state.error = ''
+    },
+    swapCalculatingReservs: (
+      state,
+      action: PayloadAction<{
+        firstCoin: Coin
+        secondCoin: Coin
+        error: string
+        fee: string
+      }>
+    ) => {
+      if (!state.error) {
+        state.tokens.map(coin =>
+          coin.id === action.payload.firstCoin.coin.id
+            ? (coin.CurrencyReservs -= action.payload.firstCoin.tradeValue + +action.payload.fee)
+            : coin
+        )
+      }
+      if (!state.error) {
+        state.tokens.map(coin =>
+          coin.id === action.payload.secondCoin.coin.id
+            ? (coin.CurrencyReservs +=
+                (action.payload.firstCoin.tradeValue * action.payload.firstCoin.coin.price) /
+                coin.price)
+            : coin
+        )
+      }
+    },
   },
 })
 
 export default CurrencyReservsSlice.reducer
-export const { disabledCoinsHandler } = CurrencyReservsSlice.actions
+export const {
+  disabledCoinsHandler,
+  swapCalculatingReservs,
+  balanceCheckForSwap,
+  currencyReservsErrorCleaner,
+} = CurrencyReservsSlice.actions

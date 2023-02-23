@@ -6,9 +6,16 @@ import styles from './CurrencyReservs.module.scss'
 type CurrencyReservsProps = {
   firstCoin: CoinsType
   secondCoin: CoinsType
+  firstCoinReserv: number
+  secondCoinReserv: number
 }
 
-const CurrencyReservs: FC<CurrencyReservsProps> = ({ firstCoin, secondCoin }) => {
+const CurrencyReservs: FC<CurrencyReservsProps> = ({
+  firstCoin,
+  secondCoin,
+  firstCoinReserv,
+  secondCoinReserv,
+}) => {
   return (
     <>
       {firstCoin.id && secondCoin.id && (
@@ -23,9 +30,7 @@ const CurrencyReservs: FC<CurrencyReservsProps> = ({ firstCoin, secondCoin }) =>
                 </div>
                 <p>
                   {new Intl.NumberFormat(['ban', 'id']).format(
-                    firstCoin.name === 'USDT'
-                      ? secondCoin.CurrencyReservsUSDT
-                      : firstCoin.CurrencyReservs
+                    firstCoin.name === 'USDT' ? secondCoin.CurrencyReservsUSDT : firstCoinReserv
                   )}
                 </p>
               </div>
@@ -36,9 +41,7 @@ const CurrencyReservs: FC<CurrencyReservsProps> = ({ firstCoin, secondCoin }) =>
                 </div>
                 <p>
                   {new Intl.NumberFormat(['ban', 'id']).format(
-                    secondCoin.name === 'USDT'
-                      ? firstCoin.CurrencyReservsUSDT
-                      : secondCoin.CurrencyReservs
+                    secondCoin.name === 'USDT' ? firstCoin.CurrencyReservsUSDT : secondCoinReserv
                   )}
                 </p>
               </div>

@@ -3,7 +3,12 @@ import arrowUp from 'src/assets/arrow-up.svg'
 import { useOutside } from 'src/hooks/useOutside'
 import { useReCalcPrice } from 'src/hooks/useReCalculatePriceInInput'
 import { useAppDispatch, useAppSelector } from 'src/hooks/useRedux'
-import { disabledCoinsHandler } from 'src/redux/reducers/CurrencyReservsSlice'
+import {
+  balanceCheckForSwap,
+  currencyReservsErrorCleaner,
+  disabledCoinsHandler,
+  swapCalculatingReservs,
+} from 'src/redux/reducers/CurrencyReservsSlice'
 import {
   selectCoinForFirstInput,
   selectCoinForSecondInput,
@@ -15,21 +20,26 @@ import { priceCalc } from 'src/utils/priceCalc'
 import swap from '../../assets/swap.svg'
 import Card from '../Card/Card'
 import CoinList from '../CoinList/CoinList'
+import CurrencyReservs from '../CurrencyReservs/CurrencyReservs'
 import InputField from '../InputField/InputField'
 import PageDescription from '../PageDescription/PageDescription'
 import Slippage from '../Slippage/Slippage'
 import Button from '../UI/Button/Button'
 import Modal from '../UI/Modal/Modal'
-import CurrencyReservs from '../CurrencyReservs/CurrencyReservs'
 import styles from './Swap.module.scss'
 import TradeDetails from './TradeDetails'
+import {
+  changeBalanceAfterSwapping,
+  errorCleaner,
+  userBalanceCheckForSwap,
+} from 'src/redux/reducers/UserSlice'
 
 const Swap = () => {
   const dispatch = useAppDispatch()
   //
   // This is states for trade value in inputs 1 and 2
-  const [firstInputSwapValue, setFirstInputSwapValue] = useState(+'')
-  const [secondInputSwapValue, setSecondInputSwapValue] = useState(+'')
+  const [firstInputSwapValue, setFirstInputSwapValue] = useState(0)
+  const [secondInputSwapValue, setSecondInputSwapValue] = useState(0)
   const onChangeValueInput = (e: ChangeEvent<HTMLInputElement>) => {
     setFirstInputSwapValue(+e.target.value)
     setSecondInputSwapValue(
@@ -143,12 +153,21 @@ const Swap = () => {
     setImpactCalcElement(impactCalc(firstInputSwapValue, firstCoin.coin) || 0)
   }, [firstCoin.coin, firstInputSwapValue, isInputsReversed])
 
+  // Balance on the wallet
+  const { wallet } = useAppSelector(state => state.UserSlice)
+  const { error } = useAppSelector(state => state.CurrencyReservsSlice)
+  //Reserv
+  const { tokens } = useAppSelector(state => state.CurrencyReservsSlice)
+  const firstCoinReserv = tokens.find(coin => coin.id === firstCoin.coin.id)
+  const secondCoinReserv = tokens.find(coin => coin.id === secondCoin.coin.id)
+  //fee
+  const fee = ((firstInputSwapValue * 0.3) / 100).toFixed(5)
   return (
     <>
       <Card>
         <form className={styles['swap']}>
           <header className={styles['header']}>
-            <div>Swap</div>
+            <h1>Swap</h1>
             <Slippage
               isPopup={slippageIsShow}
               setIsPopup={slippageSetIsShow}
@@ -163,30 +182,24 @@ const Swap = () => {
           <main className={styles['main']}>
             <div className={styles['inputs']}>
               <InputField
+                wallet={wallet}
                 coinModal={coinModal}
                 id={'firstSwapCoinSelector'}
-                // setInputValue={setFirstInputSwapValue}
-                // setInputValueOpositInput={setSecondInputSwapValue}
-                inputValue={firstInputSwapValue}
+                inputValue={firstCoin.coin.id && secondCoin.coin.id ? firstInputSwapValue : -1}
                 selectedCoin={firstCoin.coin}
                 setCoinModal={setCoinModal}
-                // setupTradeValueAction={setupTradeValueForFirstInput}
-                // setupTradeValueActionForOpositInput={setupTradeValueForSecondInput}
                 setSelectedSwapField={setSelectedSwapField}
-                disabled={false}
+                disabled={firstCoin.coin.id && secondCoin.coin.id ? false : true}
                 onChangeValueInput={onChangeValueInput}
               />
               <InputField
+                wallet={wallet}
                 disabled={true}
                 coinModal={coinModal}
                 id={'secondSwapCoinSelector'}
-                // setInputValue={setSecondInputSwapValue}
-                // setInputValueOpositInput={setFirstInputSwapValue}
-                inputValue={secondInputSwapValue}
+                inputValue={firstCoin.coin.id && secondCoin.coin.id ? secondInputSwapValue : -1}
                 selectedCoin={secondCoin.coin}
                 setCoinModal={setCoinModal}
-                // setupTradeValueAction={setupTradeValueForSecondInput}
-                // setupTradeValueActionForOpositInput={setupTradeValueForFirstInput}
                 setSelectedSwapField={setSelectedSwapField}
                 onChangeValueInput={onChangeValueInput}
               />
@@ -214,7 +227,7 @@ const Swap = () => {
                   <div className={styles['fee']}>
                     <span>Fee (0.3%):</span>
                     <span>
-                      {((firstInputSwapValue * 0.3) / 100).toFixed(5)} {firstCoin.coin.name}
+                      {fee} {firstCoin.coin.name}
                     </span>
                   </div>
                 </div>
@@ -222,7 +235,38 @@ const Swap = () => {
             )}
           </main>
           <footer className={styles['footer']}>
-            <Button title='Swap' />
+            {error && (
+              <div className={styles['error']}>
+                {error}
+                <div
+                  onClick={() => {
+                    dispatch(errorCleaner())
+                    dispatch(currencyReservsErrorCleaner())
+                  }}
+                  className={styles['close']}>
+                  -
+                </div>
+              </div>
+            )}
+            <Button
+              title='Swap'
+              onClick={e => {
+                e.preventDefault()
+                dispatch(errorCleaner())
+                dispatch(currencyReservsErrorCleaner())
+                dispatch(
+                  balanceCheckForSwap({
+                    firstCoin,
+                    secondCoin,
+                    wallet,
+                  })
+                )
+
+                dispatch(swapCalculatingReservs({ firstCoin, secondCoin, fee, error }))
+                dispatch(userBalanceCheckForSwap({ firstCoin, secondCoin }))
+                dispatch(changeBalanceAfterSwapping({ firstCoin, secondCoin, fee }))
+              }}
+            />
           </footer>
         </form>
       </Card>
@@ -236,7 +280,12 @@ const Swap = () => {
           setCoinModal={setCoinModal}
         />
       </Modal>
-      <CurrencyReservs firstCoin={firstCoin.coin} secondCoin={secondCoin.coin} />
+      <CurrencyReservs
+        firstCoinReserv={firstCoinReserv?.CurrencyReservs || 0}
+        secondCoinReserv={secondCoinReserv?.CurrencyReservs || 0}
+        firstCoin={firstCoin.coin}
+        secondCoin={secondCoin.coin}
+      />
       <PageDescription />
     </>
   )

@@ -1,41 +1,44 @@
 import { FC } from 'react'
-import { CoinsType } from 'src/models'
-import Card from '../Card/Card'
+import { useNavigate } from 'react-router-dom'
+import { CoinId, PoolPair } from 'src/models'
+import { ADD_LIQUIDITY_PATH, LP_PATH } from 'src/routes/Routes'
 import styles from './Pools.module.scss'
 type PoolProps = {
-  pairs: [CoinsType, CoinsType][]
+  pairs: PoolPair[] | []
+  lpBalance: CoinId[] | []
 }
 
-const Pool: FC<PoolProps> = ({ pairs }) => {
+const Pool: FC<PoolProps> = ({ pairs, lpBalance }) => {
+  const navigate = useNavigate()
   return (
-    <Card>
-      {pairs.map((coins, index) => (
+    <>
+      {pairs.map((pair, index) => (
         <section className={styles['pair']} key={index}>
-          <div>{coins[0].name}</div> - <div>{coins[1].name}</div>
-          <div>APR - 12%</div>
-          <div>
-            <div>
-              <div>{coins[0].name}</div> - 1000
-              <div>{coins[1].name}</div> - 4000
+          <div className={styles['title']}>
+            <div className={styles['coin']}>
+              <img src={pair.firstCoin.picture} alt={pair.firstCoin.name} />
+              {pair.firstCoin.name}
             </div>
-            <div>
-              Max: 10000 USDT
-              <div className={styles['qqq']}>
-                <div className={styles['qq']}></div>
-              </div>
+            -
+            <div className={styles['coin']}>
+              <img src={pair.secondCoin.picture} alt={pair.secondCoin.name} />
+              {pair.secondCoin.name}
             </div>
           </div>
-          <div>
-            Your liquidity
-            <div>
-              <div>{coins[0].name}</div> - 300
-              <div>{coins[1].name}</div> - 75
-            </div>
+          <div className={styles['liquidity']}>
+            Liquidity: {pair.currentLiquidity.toFixed(2)}$
           </div>
-          <div>+ -</div>
+          <div className={styles['apr']}>APR - {pair.apr}%</div>
+          <div className={styles['your-liquidity']}>
+            Your Liquidity: {lpBalance.find(el => el.id === pair.id)?.balance || 0} LP
+          </div>
+          <div className={styles['btns']}>
+            <button onClick={() => navigate(ADD_LIQUIDITY_PATH)}>+</button>
+            <button onClick={() => navigate(LP_PATH)}>-</button>
+          </div>
         </section>
       ))}
-    </Card>
+    </>
   )
 }
 

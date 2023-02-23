@@ -9,16 +9,16 @@ type CoinBtnProps = {
 }
 
 const CoinBtn: FC<CoinBtnProps> = ({ token, selectCoinAction, setCoinModal }) => {
-  const { TradePair } = useAppSelector(state => state.CurrencyReservsSlice)
+  const { firstCoin, secondCoin } = useAppSelector(state => state.SwapDetailsSlice)
   const dispatch = useAppDispatch()
   const [disbledCoin, setDisbledCoin] = useState(false)
   useEffect(() => {
-    if (token === TradePair[0] || token === TradePair[1]) {
+    if (token === firstCoin.coin || token === secondCoin.coin) {
       setDisbledCoin(true)
     } else {
       setDisbledCoin(false)
     }
-  }, [TradePair, token])
+  }, [firstCoin.coin, secondCoin.coin, token])
 
   return (
     <button

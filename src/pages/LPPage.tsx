@@ -1,9 +1,8 @@
 import React from 'react'
+import RedeemLp from 'src/components/RedeemLp/RedeemLp'
 
 const LPPage = () => {
-  return (
-    <div>LPPage</div>
-  )
+  return <RedeemLp />
 }
 
 export default LPPage

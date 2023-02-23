@@ -1,0 +1,108 @@
+@import '../../styles/vars.scss';
+.redeem {
+  display: flex;
+  flex-direction: column;
+  gap: rem(8);
+  .header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: rem(10);
+    h1 {
+      font-size: rem(16);
+    }
+  }
+  .main {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    .chooseBtns {
+      display: flex;
+      justify-content: space-between;
+      gap: rem(20);
+    }
+    .amount {
+      display: flex;
+      flex-direction: column;
+      gap: rem(20);
+      .balance {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        h2 {
+          font-size: rem(20);
+        }
+        h3 {
+          font-size: rem(16);
+        }
+      }
+      .input {
+        background-color: $input;
+        display: flex;
+        justify-content: space-between;
+        padding: rem(16);
+        border-radius: rem(20);
+      }
+    }
+    .output {
+      h2 {
+        font-size: rem(20);
+      }
+      .coins {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: rem(10) 0;
+        padding: rem(20);
+        width: 100%;
+        border: 1px solid #c3b5fd52;
+        border-radius: rem(10);
+        background-color: $secondaryBg;
+        .coin {
+          display: flex;
+          flex-direction: column;
+          gap: rem(10);
+          .coinPreview {
+            display: flex;
+            align-items: center;
+            gap: rem(10);
+            img {
+              width: rem(30);
+              height: rem(30);
+            }
+          }
+        }
+      }
+    }
+  }
+  .footer {
+    display: flex;
+    flex-direction: column;
+    gap: rem(20);
+    .error {
+      text-align: center;
+      color: orangered;
+      background: #0000003a;
+      padding: rem(10) rem(20);
+      border-radius: rem(6);
+      position: relative;
+      .close {
+        cursor: pointer;
+        position: absolute;
+        top: rem(2);
+        right: rem(2);
+        width: rem(15);
+        height: rem(15);
+        font-size: 1.2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: rgba(245, 245, 245, 0.471);
+        &:hover {
+          background: rgba(255, 166, 0, 0.1);
+          border-radius: rem(1);
+          color: orangered;
+        }
+      }
+    }
+  }
+}
