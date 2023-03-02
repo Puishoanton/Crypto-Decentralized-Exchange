@@ -1,0 +1,71 @@
+@import '../../styles/vars.scss';
+@import '../../styles/vars.scss';
+
+.coin-list {
+  margin: rem(20);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  span {
+    color: white;
+    font-size: rem(20);
+  }
+  input {
+    max-width: 600px;
+    color: white;
+    margin: rem(10) 0 rem(20) 0;
+    outline: none;
+    background-color: transparent;
+    border: 1px solid $border1;
+    border-radius: rem(10);
+    width: 100%;
+    padding: rem(5) rem(10);
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    border-top: 0.6px solid $border1;
+    margin: 0;
+    padding: 0;
+    padding-top: rem(20);
+    list-style: none;
+
+    li {
+      section {
+        .title {
+          display: flex;
+          align-items: center;
+          gap: rem(10);
+          img {
+            width: rem(28);
+            height: rem(28);
+          }
+        }
+        .body {
+          display: flex;
+          flex-direction: column;
+
+          p {
+            text-align: left;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+@media (max-width: 576px) {
+  .coin-list {
+    ul {
+      li {
+        button {
+          font-size: rem(13);
+        }
+      }
+    }
+  }
+}

@@ -148,6 +148,7 @@ const CurrencyReservsSlice = createSlice({
         firstCoin: Coin
         secondCoin: Coin
         wallet: WalletId[]
+        fee: string
       }>
     ) => {
       const firstCoinWalletBalance = action.payload.wallet.reduce((acc, coin) => {
@@ -159,7 +160,7 @@ const CurrencyReservsSlice = createSlice({
         return acc
       }, 0)
 
-      if (action.payload.firstCoin.tradeValue > firstCoinWalletBalance) {
+      if (action.payload.firstCoin.tradeValue + +action.payload.fee > firstCoinWalletBalance) {
         state.error = `Insuficient ${action.payload.firstCoin.coin.name} balance`
       }
     },

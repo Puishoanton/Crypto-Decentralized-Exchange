@@ -26,3 +26,4 @@ export type PoolPair = {
 }
 export type CoinId = { id: string; balance: number; price: number }
 export type WalletId = { id: string; balance: number }
+

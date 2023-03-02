@@ -1,4 +1,5 @@
 import { ChangeEvent, Dispatch, FC, SetStateAction } from 'react'
+import { useAppSelector } from 'src/hooks/useRedux'
 import { CoinsType, WalletId } from 'src/models'
 import ChooseCoinBtn from '../UI/ChooseTokenBtn/ChooseCoinBtn'
 import SwapInput from '../UI/SwapInput/SwapInput'
@@ -18,7 +19,7 @@ type InputFieldProps = {
 
 const InputField: FC<InputFieldProps> = props => {
   const currentCoin = props.wallet.find(coin => coin.id === props.selectedCoin.name)
-
+  const {isConnected} = useAppSelector(state=> state.UserSlice)
   return (
     <div className={styles['swap-field']}>
       <div className={styles['input-balance']}>
@@ -27,7 +28,7 @@ const InputField: FC<InputFieldProps> = props => {
           onChangeValueInput={props.onChangeValueInput}
           swapInputValue={props.inputValue}
         />
-        {props.selectedCoin.name && (
+        {props.selectedCoin.name && isConnected && (
           <div className={styles['balance']}>
             Balance: {currentCoin?.balance} {props.selectedCoin.name}
           </div>

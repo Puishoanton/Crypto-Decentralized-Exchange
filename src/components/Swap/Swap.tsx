@@ -259,11 +259,11 @@ const Swap = () => {
                     firstCoin,
                     secondCoin,
                     wallet,
+                    fee,
                   })
                 )
-
-                dispatch(swapCalculatingReservs({ firstCoin, secondCoin, fee, error }))
                 dispatch(userBalanceCheckForSwap({ firstCoin, secondCoin }))
+                dispatch(swapCalculatingReservs({ firstCoin, secondCoin, fee, error }))
                 dispatch(changeBalanceAfterSwapping({ firstCoin, secondCoin, fee }))
               }}
             />

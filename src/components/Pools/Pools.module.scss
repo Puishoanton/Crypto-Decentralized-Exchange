@@ -1,74 +1,50 @@
 @import '../../styles/vars.scss';
 
+.header {
+  font-size: rem(24);
+  text-align: center;
+  margin-bottom: rem(30);
+  background-color: #74747310;
+  padding: rem(10) rem(20);
+  border-radius: rem(50);
+}
 .pairs {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
   gap: rem(15);
   margin: 0 rem(10);
   .pair {
-    display: flex;
-    gap: rem(30);
-    justify-content: center;
-    align-items: center;
-    background-color: #74747321;
-    border-radius: rem(20);
-    padding: rem(5) rem(7);
-    height: rem(50);
-
-    .title {
-      width: 30%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    list-style: none;
+    section {
       gap: rem(10);
-      border-right: 1px solid #7474736a;
-      padding-right: rem(20);
-      .coin {
+      .title {
         display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: rem(5);
-        img {
-          width: rem(30);
-          height: rem(30);
+        gap: rem(10);
+        background-color: $input;
+        padding: rem(10) rem(20);
+        border-radius: rem(20);
+        .coin {
+          display: flex;
+          gap: rem(10);
+          img {
+            width: rem(30);
+            height: rem(30);
+          }
         }
       }
     }
-    .liquidity {
-      width: 25%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      border-right: 1px solid #7474736a;
-      padding-right: rem(20);
-    }
-    .apr {
-      width: 15%;
-      height: 100%;
-      border-right: 1px solid #7474736a;
-      padding-right: rem(20);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .your-liquidity {
-      width: 25%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-right: 1px solid #7474736a;
-      padding-right: rem(20);
-      height: 100%;
+    .body {
+      background-color: #74747324;
+      padding: rem(10) rem(20);
+      border-radius: rem(20);
     }
     .btns {
-      width: 15%;
       display: flex;
       justify-content: center;
       align-items: center;
       gap: rem(10);
-      height: 100%;
       button {
         border: none;
         background-color: transparent;
@@ -78,57 +54,14 @@
         font-size: rem(30);
         color: rgba(255, 255, 255, 0.514);
         background-color: #74747324;
-        width: rem(30);
+        width: rem(100);
         height: rem(30);
-        border-radius: 50%;
+        border-radius: rem(20);
         &:hover {
           background-color: #74747379;
           color: rgba(255, 255, 255, 0.7);
           transform: scale(0.85);
         }
-      }
-    }
-  }
-}
-@media (max-width: 768px) {
-  .pairs {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    .pair {
-      display: flex;
-      gap: rem(15);
-      flex-wrap: wrap;
-      justify-content: space-between;
-      justify-content: space-around;
-      align-items: center;
-      height: fit-content;
-      .title {
-        min-width: 170px;
-        border-right: none;
-        padding-right: rem(0);
-        .coin {
-          gap: rem(3);
-          img {
-            width: rem(25);
-            height: rem(25);
-          }
-        }
-      }
-      .liquidity {
-        min-width: 140px;
-        border-right: none;
-        padding-right: rem(0);
-      }
-      .apr {
-        min-width: 80px;
-        border-right: none;
-        padding-right: rem(0);
-      }
-      .your-liquidity {
-        min-width: 160px;
-        border-right: none;
-        padding-right: rem(00);
       }
     }
   }

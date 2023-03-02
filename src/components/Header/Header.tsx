@@ -12,7 +12,7 @@ import {
   SWAP_PATH,
 } from 'src/routes/Routes'
 import notification from '../../assets/notification.svg'
-import Button from '../UI/Button/Button'
+// import Button from '../UI/Button/Button'
 import Modal from '../UI/Modal/Modal'
 import Selector from '../UI/Selector/Selector'
 import styles from './Header.module.scss'
@@ -65,11 +65,11 @@ const Header = () => {
               <p>0x88DC...560</p>
             </div>
           ) : (
-            <Button
-              title='Connect a Wallet'
-              className='wallet'
+            <button
               onClick={() => dispatch(connectWallet())}
-            />
+              className={[styles['button'], styles['wallet']].join(' ')}>
+              Connect wallet
+            </button>
           )}
         </div>
       </header>

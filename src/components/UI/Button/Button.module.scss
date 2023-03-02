@@ -32,6 +32,16 @@
   &:hover {
     font-size: 1rem;
     font-weight: normal;
+    cursor: pointer;
+  }
+}
+.disabled {
+  background: #7957c364;
+  &:hover {
+    cursor: not-allowed;
+    font-size: 1rem;
+    font-weight: normal;
+    background: #7957c364;
   }
 }
 

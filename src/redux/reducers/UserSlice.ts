@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import { Coin, CoinId, WalletId } from 'src/models'
+import { Coin, CoinId, CoinsType, WalletId } from 'src/models'
 
 type initialStateProps = {
   isConnected: boolean
@@ -26,6 +26,11 @@ const initialState: initialStateProps = {
   lpBalance: [],
   error: '',
 }
+
+export const WalletMap = initialState.wallet.reduce((acc: { [key: string]: WalletId }, coin) => {
+  acc[coin.id] = coin
+  return acc
+}, {})
 
 const UserSlice = createSlice({
   name: 'user',
@@ -54,7 +59,7 @@ const UserSlice = createSlice({
       // const secondCoinReservBalanceInUsdt =
       //   action.payload.secondCoin.coin.CurrencyReservs * action.payload.secondCoin.coin.price
 
-      if (action.payload.firstCoin.tradeValue > firstCoinWalletBalance) {
+      if (action.payload.firstCoin.tradeValue >= firstCoinWalletBalance) {
         state.error = `Insuficient ${action.payload.firstCoin.coin.name} balance`
       }
       // if (tradeValueInUsdt > secondCoinReservBalanceInUsdt) {
@@ -218,6 +223,9 @@ const UserSlice = createSlice({
         )
       }
     },
+    faucet: (state, action: PayloadAction<CoinsType>) => {
+      state.wallet.map(coin => (coin.id === action.payload.name ? (coin.balance += 100) : coin))
+    },
   },
 })
 
@@ -231,4 +239,5 @@ export const {
   connectWallet,
   userBalanceCheckForSwap,
   changeBalanceAfterSwapping,
+  faucet,
 } = UserSlice.actions

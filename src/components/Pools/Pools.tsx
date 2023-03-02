@@ -15,9 +15,12 @@ const Pools = () => {
     }
   }, [dispatch, pairs.length, tokens])
   return (
-    <section className={styles['pairs']}>
-      <Pool pairs={pairs} lpBalance={lpBalance} />
-    </section>
+    <>
+      <h1 className={styles['header']}>Liquidity pools </h1>
+      <ul className={styles['pairs']}>
+        <Pool pairs={pairs} lpBalance={lpBalance} />
+      </ul>
+    </>
   )
 }
 
