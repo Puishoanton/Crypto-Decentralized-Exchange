@@ -15,6 +15,7 @@ import notification from '../../assets/notification.svg'
 // import Button from '../UI/Button/Button'
 import Modal from '../UI/Modal/Modal'
 import Selector from '../UI/Selector/Selector'
+import Wallet from '../Wallet/Wallet'
 import styles from './Header.module.scss'
 
 const Header = () => {
@@ -28,7 +29,7 @@ const Header = () => {
   const windowOuterWidth = window.outerWidth
   const [isVisibleNotification, setIsVisibleNotification] = useState(false)
   const dispatch = useAppDispatch()
-  const { isConnected, wallet } = useAppSelector(state => state.UserSlice)
+  const { isConnected, wallet, history } = useAppSelector(state => state.UserSlice)
   const [isVisibleWallet, setIsVisibleWallet] = useState(false)
 
   return (
@@ -75,14 +76,15 @@ const Header = () => {
       </header>
       <Modal
         isVisibleNotification={isVisibleNotification}
-        setIsVisibleNotification={setIsVisibleNotification}
-      />
+        setIsVisibleNotification={setIsVisibleNotification}>
+        <ul>
+          {history.map((el, i) => (
+            <li key={i}>{el}</li>
+          ))}
+        </ul>
+      </Modal>
       <Modal isVisibleNotification={isVisibleWallet} setIsVisibleNotification={setIsVisibleWallet}>
-        {wallet.map(coin => (
-          <div key={coin.id}>
-            {coin.id} - {coin.balance}
-          </div>
-        ))}
+        <Wallet wallet={wallet} />
       </Modal>
     </>
   )

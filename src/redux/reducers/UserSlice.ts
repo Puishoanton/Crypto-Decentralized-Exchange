@@ -6,6 +6,7 @@ type initialStateProps = {
   wallet: WalletId[]
   lpBalance: CoinId[] | []
   error: string
+  history: string[]
 }
 const initialState: initialStateProps = {
   isConnected: false,
@@ -25,6 +26,7 @@ const initialState: initialStateProps = {
   ],
   lpBalance: [],
   error: '',
+  history: [],
 }
 
 export const WalletMap = initialState.wallet.reduce((acc: { [key: string]: WalletId }, coin) => {
@@ -37,6 +39,7 @@ const UserSlice = createSlice({
   initialState,
   reducers: {
     connectWallet: state => {
+      state.history.push('Wallet connected')
       state.isConnected = !state.isConnected
     },
     userBalanceCheckForSwap: (
@@ -148,6 +151,7 @@ const UserSlice = createSlice({
         }
 
         if (isSecondCoinPresentInWallet && !state.error) {
+          state.history.push(` +${lpBalance.toFixed(3)} LP | Success`)
           coin.balance -= action.payload.secondCoin.tradeValue
         }
 
@@ -163,6 +167,8 @@ const UserSlice = createSlice({
       } else if (currentPair && !state.error) {
         currentPair.balance +=
           action.payload.firstCoin.tradeValue + action.payload.secondCoin.tradeValue
+      } else {
+        state.history.push(`${state.error} | Unsuccess`)
       }
     },
     removeLpBalance: (
@@ -189,6 +195,7 @@ const UserSlice = createSlice({
         }
 
         if (isSecondCoinPresentInWallet && !state.error) {
+          state.history.push(` -${action.payload.inputLpValue.toFixed(3)} LP | Success`)
           coin.balance +=
             ((action.payload.inputLpValue / 2) * action.payload.lpPrice) /
             action.payload.secondCoin.coin.price
@@ -200,6 +207,8 @@ const UserSlice = createSlice({
 
       if (currentPair && !state.error) {
         currentPair.balance -= action.payload.inputLpValue
+      } else {
+        state.history.push(`${state.error} | Unsuccess`)
       }
     },
     changeBalanceAfterSwapping: (
@@ -211,6 +220,13 @@ const UserSlice = createSlice({
       }>
     ) => {
       if (!state.error) {
+        state.history.push(
+          ` ${action.payload.firstCoin.tradeValue} ${
+            action.payload.firstCoin.coin.name
+          } => ${action.payload.secondCoin.tradeValue.toFixed(3)} ${
+            action.payload.secondCoin.coin.name
+          } | Success`
+        )
         state.wallet.map(coin =>
           coin.id === action.payload.firstCoin.coin.name
             ? (coin.balance -= action.payload.firstCoin.tradeValue + +action.payload.fee)
@@ -221,10 +237,19 @@ const UserSlice = createSlice({
             ? (coin.balance += action.payload.secondCoin.tradeValue)
             : coin
         )
+      } else {
+        state.history.push(`${state.error} | Unsuccess`)
       }
     },
     faucet: (state, action: PayloadAction<CoinsType>) => {
-      state.wallet.map(coin => (coin.id === action.payload.name ? (coin.balance += 100) : coin))
+      state.wallet.map(coin => {
+        if (coin.id === action.payload.name) {
+          state.history.push(`+100 ${coin.id} | Success`)
+          return (coin.balance += 100)
+        } else {
+          return coin
+        }
+      })
     },
   },
 })

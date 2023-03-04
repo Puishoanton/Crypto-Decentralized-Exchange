@@ -38,7 +38,7 @@ const Faucet = () => {
                 </p>
               </main>
               <footer className={styles['request']}>
-                <Button title='Request coin' onClick={() => dispatch(faucet(token))} />
+                <Button title='Request coins' onClick={() => dispatch(faucet(token))} />
               </footer>
             </Card>
           </li>

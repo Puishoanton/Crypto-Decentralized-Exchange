@@ -1,0 +1,19 @@
+@import '../../styles/vars.scss';
+
+.wallet {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: rem(10);
+  .account {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: rem(5);
+  }
+  .body {
+    flex: 1 1 auto;
+  }
+  // .footer {
+  // }
+}
