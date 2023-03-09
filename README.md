@@ -2,9 +2,9 @@
 
 ## I am pleased to present my <span style="color:orangered">Decentralized Exchange<span>.
 
-## Here's a little about the project:
+### Here's a little about the project:
 
-- <span style="color:#6e42ca">Header:
+- <span style="color:red">Header:
   Here you can use navigation, view your messages, and connect a wallet (this wallet does not hold any value and is completely fake). In the wallet itself, you can view your balance, wallet address, send and receive transactions (coming soon), and change the network.
 
 - <span style="color:#6e42ca">Greeting page<span>:
