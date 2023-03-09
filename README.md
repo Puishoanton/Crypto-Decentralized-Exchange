@@ -20,5 +20,5 @@
 - <span style="color:#6e42ca">Redeem Liquidity page<span>:
   Here you can retrieve your liquidity by exchanging your LP tokens for selected assets in a 50-50 ratio (Output in the Redeem LP block).
   ![Redeem Liquidity page](https://github.com/Puishoanton/Crypto-Decentralized-Exchange/blob/master/src/assets/readme_imgs/remove.jpg)
-  <span style="color:#6e42ca">Faucet page<span>: To perform any activity in this application, we need coins that we can obtain from the faucet. Here is a list of all available coins or tokens on the DEX. Only users with a connected wallet can request assets. When you click on Request, you will receive 100 selected coins in your wallet.
+ - <span style="color:#6e42ca">Faucet page<span>: To perform any activity in this application, we need coins that we can obtain from the faucet. Here is a list of all available coins or tokens on the DEX. Only users with a connected wallet can request assets. When you click on Request, you will receive 100 selected coins in your wallet.
   ![Redeem Liquidity page](https://github.com/Puishoanton/Crypto-Decentralized-Exchange/blob/master/src/assets/readme_imgs/faucet.jpg)
