@@ -11,7 +11,9 @@ const Greating = () => {
         Welcome <br /> to my pet project!
       </header>
       <main className={styles['main-content']}>
-        This is a decentralized exchange invented by me.
+        This is a decentralized exchange invented by me. Here you can try how the DEX works, make
+        Swaps, add liquidity to pools and redeem it, and request coins from the faucet. During the
+        development of this DEX, I learned how exchanges work.
       </main>
       <footer className={styles['start']}>
         <Link to={SWAP_PATH}>

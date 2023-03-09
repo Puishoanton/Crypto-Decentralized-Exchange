@@ -1,19 +1,265 @@
 @import '../../styles/vars.scss';
 
-.wallet {
-  height: 100%;
+.container {
+  position: absolute;
+  width: 100%;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
-  gap: rem(10);
-  .account {
+  align-items: center;
+  justify-content: space-between;
+  background-color: $secondaryBg;
+  color: $text-color;
+  overflow: hidden;
+  border-radius: rem(20);
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: rem(20) rem(10);
+    background-color: $primary;
+    color: white;
+
+    .logo {
+      font-size: rem(20);
+      font-weight: bold;
+    }
+
+    .selector {
+      select {
+        padding: rem(5) rem(5);
+        background-color: $second;
+        border: $border1;
+        font-size: rem(14);
+        color: $secondaryBg;
+        width: 85%;
+        border-radius: rem(20);
+        &:hover {
+          background-color: $currentBg;
+        }
+
+        option {
+          background-color: $primary;
+          color: white;
+        }
+      }
+    }
+
+    .profile {
+      img {
+        width: rem(30);
+        height: rem(30);
+        border-radius: 50%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .main {
     display: flex;
     flex-direction: column;
+
+    align-items: center;
     justify-content: center;
-    gap: rem(5);
+    width: 100%;
+
+    .user {
+      display: flex;
+      flex-direction: column;
+      gap: rem(20);
+      align-items: center;
+      margin-top: rem(40);
+      margin-bottom: rem(20);
+
+      .icon {
+        img {
+          width: rem(50);
+          height: rem(50);
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid $currentBg;
+        }
+      }
+
+      .balance {
+        font-size: rem(32);
+        font-weight: bold;
+        margin: 0 rem(20);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: rem(20);
+        margin-left: auto;
+
+        .action {
+          background-color: $second;
+          border: none;
+          border-radius: rem(8);
+          padding: rem(5) rem(10);
+          font-size: 12px;
+          font-weight: bold;
+          color: $text-color;
+          cursor: pointer;
+          transition: all 0.2s ease;
+
+          &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+          }
+        }
+      }
+    }
+
+    .tabs {
+      display: flex;
+      margin-bottom: 20px;
+
+      .tab {
+        padding: 10px;
+        font-size: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.active,
+        &:hover {
+          color: $primary;
+          border-bottom: 2px solid $primary;
+        }
+
+        & + .tab {
+          margin-left: 20px;
+        }
+      }
+    }
+
+    .assets {
+      width: 100%;
+      height: 200px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #16162d;
+      color: #c8c7cc;
+      padding: rem(20);
+      margin-top: rem(20);
+      // overflow: hidden;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        background-color: none;
+        width: rem(10);
+      }
+
+      /* background of the scrollbar except button or resizer */
+      &::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0.047);
+      }
+
+      /* scrollbar itself */
+      &::-webkit-scrollbar-thumb {
+        background-color: #babac05b;
+        border-radius: rem(10);
+        border: 2px solid rgba(255, 255, 255, 0.411);
+      }
+
+      /* set button(top and bottom of the scrollbar) */
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+      .asset {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        padding: rem(10);
+        margin-bottom: rem(10);
+        background-color: #1c1c33;
+        border-radius: rem(5);
+
+        .assetName {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: rem(7);
+          color: #c8c7cc;
+          font-size: rem(18);
+          font-weight: bold;
+          img {
+            width: rem(25);
+            height: rem(25);
+          }
+        }
+
+        .assetBalance {
+          color: #c8c7cc;
+          font-size: rem(16);
+          font-weight: normal;
+        }
+      }
+    }
+
+    .transactions {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background-color: #16162d;
+      color: #c8c7cc;
+      padding: rem(20);
+      margin-top: rem(20);
+
+      height: 200px;
+      overflow-y: scroll;
+      &::-webkit-scrollbar {
+        background-color: none;
+        width: rem(10);
+      }
+
+      /* background of the scrollbar except button or resizer */
+      &::-webkit-scrollbar-track {
+        background-color: rgba(255, 255, 255, 0.047);
+      }
+
+      /* scrollbar itself */
+      &::-webkit-scrollbar-thumb {
+        background-color: #babac05b;
+        border-radius: rem(10);
+        border: 2px solid rgba(255, 255, 255, 0.411);
+      }
+
+      /* set button(top and bottom of the scrollbar) */
+      &::-webkit-scrollbar-button {
+        display: none;
+      }
+      .transaction {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        padding: rem(10);
+        margin-bottom: rem(10);
+        background-color: #1c1c33;
+        border-radius: rem(5);
+        color: #c8c7cc;
+        font-size: rem(16);
+        font-weight: normal;
+      }
+    }
   }
-  .body {
-    flex: 1 1 auto;
+  .footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 50px;
+    padding: rem(20) rem(5);
+    background-color: #4a495e;
+    color: #c8c7cc;
+    font-size: rem(16);
+    font-weight: normal;
   }
-  // .footer {
-  // }
 }

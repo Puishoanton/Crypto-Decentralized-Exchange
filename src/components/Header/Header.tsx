@@ -12,6 +12,7 @@ import {
   SWAP_PATH,
 } from 'src/routes/Routes'
 import notification from '../../assets/notification.svg'
+import Transaction from '../Transactions/Transaction'
 // import Button from '../UI/Button/Button'
 import Modal from '../UI/Modal/Modal'
 import Selector from '../UI/Selector/Selector'
@@ -29,7 +30,7 @@ const Header = () => {
   const windowOuterWidth = window.outerWidth
   const [isVisibleNotification, setIsVisibleNotification] = useState(false)
   const dispatch = useAppDispatch()
-  const { isConnected, wallet, history } = useAppSelector(state => state.UserSlice)
+  const { isConnected, history } = useAppSelector(state => state.UserSlice)
   const [isVisibleWallet, setIsVisibleWallet] = useState(false)
 
   return (
@@ -77,14 +78,10 @@ const Header = () => {
       <Modal
         isVisibleNotification={isVisibleNotification}
         setIsVisibleNotification={setIsVisibleNotification}>
-        <ul>
-          {history.map((el, i) => (
-            <li key={i}>{el}</li>
-          ))}
-        </ul>
+        <Transaction transactions={history} />
       </Modal>
       <Modal isVisibleNotification={isVisibleWallet} setIsVisibleNotification={setIsVisibleWallet}>
-        <Wallet wallet={wallet} />
+        <Wallet />
       </Modal>
     </>
   )
