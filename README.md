@@ -6,7 +6,6 @@
 - React
 - TypeScript
 - Redux Toolkit 
-- Firebase
 - HTML, CSS(SCSS), JS
 
 ### Here's a little about the project:
