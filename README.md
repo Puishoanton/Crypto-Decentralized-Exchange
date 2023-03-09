@@ -2,6 +2,13 @@
 
 ## I am pleased to present my <span style="color:orangered">Decentralized Exchange<span>.
 
+### Stack of technology: 
+- React
+- TypeScript
+- Redux Toolkit 
+- Firebase
+- HTML, CSS(SCSS), JS
+
 ### Here's a little about the project:
 
 - <span style="color:red">Header:
@@ -22,3 +29,16 @@
   ![Redeem Liquidity page](https://github.com/Puishoanton/Crypto-Decentralized-Exchange/blob/master/src/assets/readme_imgs/remove.jpg)
  - <span style="color:#6e42ca">Faucet page<span>: To perform any activity in this application, we need coins that we can obtain from the faucet. Here is a list of all available coins or tokens on the DEX. Only users with a connected wallet can request assets. When you click on Request, you will receive 100 selected coins in your wallet.
   ![Redeem Liquidity page](https://github.com/Puishoanton/Crypto-Decentralized-Exchange/blob/master/src/assets/readme_imgs/faucet.jpg)
+### Install project locally: 
+1. Download the source code on your computer,  
+2. Open in IDE
+3. Write code in the terminal for uploading dependencies: 
+```bash
+npm i
+```
+4. Next launch project: 
+```bash
+npm start
+```
+### Please inform me if you find out any bugs
+Thank you!
